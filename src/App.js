@@ -90,7 +90,7 @@ class App extends Component {
                 >
                   {({ data, error, loading }) => {
                     return loading ? (
-                      <LinearProgress mode="query" />
+                      <LinearProgress variant="query" style={{ width: '100%' }} />
                     ) : error ? (
                       <Error error={error} />
                     ) : (

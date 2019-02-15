@@ -1,68 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting started
 
-## Available Scripts
+### Local Development
 
-In the project directory, you can run:
+#### Deploy the contract to Ganache
 
-### `npm start`
+1. Install Ganache and Truffle:
+   ```bash
+   npm install -g ganache-cli truffle
+   ```
+2. Start Ganache (in one terminal):
+   ```bash
+   ganache-cli
+   ```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Start a local Graph Node
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+This assumes you already have Ganache running and have performed
+the above migration steps.
 
-### `npm test`
+1. Clone `https://github.com/graphprotocol/graph-node/`
+2. Enter the Graph Node's Docker directory:
+   ```bash
+   cd graph-node/docker`
+   ```
+3. Start a local Graph Node that will connect to Ganache on your host:
+   ```bash
+   docker-compose up
+   ```
+4. Now, in another terminal, install Graph CLI with
+   ```bash
+   npm install -g @graphprotocol/graph-cli
+   ```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Deploy the subgraph to the local Graph Node
 
-### `npm run build`
+1. Ceate a new example subgraph with:
+   ```bash
+   graph init <USERNAME>/example-subgraph
+   ```
+2. Follow the instructions for installing dependencies and running
+   the code generation (typically: `yarn && yarn codegen`).
+3. Deploy the example contract to Ganache (in another terminal):
+   ```bash
+   truffle compile
+   truffle migrate
+   ```
+   This willl also create a couple of example transactions.
+   **Important:** Remember the address of the `GravityRegistry` contract
+   printed by the migrations. You will need this later.
+4. Replace the contract address with the one from Ganache (this is
+   the one that you remembered or copied earlier):
+   ```bash
+   sed -i -e \
+     's/0x2E645469f354BB4F5c8a05B3b30A929361cf77eC/<GANACHE_CONTRACT_ADDRESS>/g' \
+     subgraph.yamll
+   ```
+5. Deploy the subgraph to your local Graph Node:
+   ```bash
+   graph create --node http://localhost:8020/ <USERNAME>/example-subgraph
+   graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/ <USERNAME>/example-subgraph
+   ```
+6. You can now go to `http://localhost:8000/subgraphs/name/<USERNAME>/example-subgraph`
+   to query our subgraph. Try the following query, for example:
+   ```graphql
+   {
+     gravatars {
+       id
+       owner
+       displayName
+       imageUrl
+     }
+   }
+   ```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Connect this dApp to the subgraph
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+1. Write the the GraphQL endpoint of our subgraph to `.env` in this directory:
+   ```bash
+   echo "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:8000/subgraphs/name/<USERNAME>/example-subgraph" > .env
+   ```
+2. Then, start this app:
+   ```bash
+   npm install
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Hosted Service
 
-### `npm run eject`
+#### Create and deploy the subgraph
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Sign up on https://thegraph.com/explorer/
+2. Create a new subgraph on https://thegraph.com/dashboard/
+3. Install Graph CLI with `npm install -g @graphprotocol/graph-cli`
+4. Run `graph init <GITHUB_USERNAME>/<SUBGRAPH_NAME>` to create a subgraph template locally.
+5. Follow the instructions `graph init` prints for you to deploy the subgraph to the Hosted Service.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Connect this dApp to the subgraph
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Go to `https://thegraph.com/exporer/subgraph/<GITHUB_USERNAME>/<SUBGRAPH_NAME>/`
+2. Copy the GraphQL HTTP endpoint (e.g. `https://api.thegraph.com/subgraphs/name/github-username/subgraph-name`)
+3. Write it to `.env` in this directory:
+   ```bash
+   echo "REACT_APP_GRAPHQL_ENDPOINT=https://api.thegraph.com/subgraphs/name/github-username/subgraph-name" > .env
+   ```
+4. Start this app:
+   ```bash
+   npm install
+   npm start
+   ```

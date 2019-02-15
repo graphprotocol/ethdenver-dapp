@@ -2,16 +2,11 @@
 
 ### Local Development
 
-#### Deploy the contract to Ganache
+#### Install tools
 
-1. Install Ganache and Truffle:
-   ```bash
-   npm install -g ganache-cli truffle
-   ```
-2. Start Ganache (in one terminal):
-   ```bash
-   ganache-cli
-   ```
+```bash
+npm install -g ganache-cli truffle @graphprotocol/graph-cli
+```
 
 #### Start a local Graph Node
 
@@ -21,15 +16,11 @@ the above migration steps.
 1. Clone `https://github.com/graphprotocol/graph-node/`
 2. Enter the Graph Node's Docker directory:
    ```bash
-   cd graph-node/docker`
+   cd graph-node/docker
    ```
 3. Start a local Graph Node that will connect to Ganache on your host:
    ```bash
    docker-compose up
-   ```
-4. Now, in another terminal, install Graph CLI with
-   ```bash
-   npm install -g @graphprotocol/graph-cli
    ```
 
 #### Deploy the subgraph to the local Graph Node

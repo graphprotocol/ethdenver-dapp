@@ -40,13 +40,17 @@ the above migration steps.
 2. Follow the instructions for installing dependencies and running
    the code generation (typically: `yarn && yarn codegen`).
 3. Deploy the example contract to Ganache (in another terminal):
+
    ```sh
    truffle compile
    truffle migrate
    ```
+
    This willl also create a couple of example transactions.
-   **Important:** Remember the address of the `GravityRegistry` contract
-   printed by the migrations. You will need this later.
+
+   **Important: Remember the address of the `GravityRegistry` contract
+   printed by the migrations. You will need this later.**
+
 4. Replace the contract address with the one from Ganache (this is
    the one that you remembered or copied earlier):
    ```sh

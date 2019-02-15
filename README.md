@@ -2,10 +2,18 @@
 
 ### Local Development
 
-#### Install tools
+#### Install tools and start Ganache
+
+Install dependencies:
 
 ```sh
 npm install -g ganache-cli truffle @graphprotocol/graph-cli
+```
+
+Start Ganache:
+
+```sh
+ganache-cli
 ```
 
 #### Start a local Graph Node

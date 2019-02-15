@@ -4,7 +4,7 @@
 
 #### Install tools
 
-```bash
+```sh
 npm install -g ganache-cli truffle @graphprotocol/graph-cli
 ```
 
@@ -15,24 +15,24 @@ the above migration steps.
 
 1. Clone `https://github.com/graphprotocol/graph-node/`
 2. Enter the Graph Node's Docker directory:
-   ```bash
+   ```sh
    cd graph-node/docker
    ```
 3. Start a local Graph Node that will connect to Ganache on your host:
-   ```bash
+   ```sh
    docker-compose up
    ```
 
 #### Deploy the subgraph to the local Graph Node
 
 1. Ceate a new example subgraph with:
-   ```bash
+   ```sh
    graph init <USERNAME>/example-subgraph
    ```
 2. Follow the instructions for installing dependencies and running
    the code generation (typically: `yarn && yarn codegen`).
 3. Deploy the example contract to Ganache (in another terminal):
-   ```bash
+   ```sh
    truffle compile
    truffle migrate
    ```
@@ -41,13 +41,13 @@ the above migration steps.
    printed by the migrations. You will need this later.
 4. Replace the contract address with the one from Ganache (this is
    the one that you remembered or copied earlier):
-   ```bash
+   ```sh
    sed -i -e \
      's/0x2E645469f354BB4F5c8a05B3b30A929361cf77eC/<GANACHE_CONTRACT_ADDRESS>/g' \
      subgraph.yamll
    ```
 5. Deploy the subgraph to your local Graph Node:
-   ```bash
+   ```sh
    graph create --node http://localhost:8020/ <USERNAME>/example-subgraph
    graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/ <USERNAME>/example-subgraph
    ```
@@ -67,11 +67,11 @@ the above migration steps.
 #### Connect this dApp to the subgraph
 
 1. Write the the GraphQL endpoint of our subgraph to `.env` in this directory:
-   ```bash
+   ```sh
    echo "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:8000/subgraphs/name/<USERNAME>/example-subgraph" > .env
    ```
 2. Then, start this app:
-   ```bash
+   ```sh
    npm install
    npm start
    ```
@@ -91,11 +91,11 @@ the above migration steps.
 1. Go to `https://thegraph.com/exporer/subgraph/<GITHUB_USERNAME>/<SUBGRAPH_NAME>/`
 2. Copy the GraphQL HTTP endpoint (e.g. `https://api.thegraph.com/subgraphs/name/github-username/subgraph-name`)
 3. Write it to `.env` in this directory:
-   ```bash
+   ```sh
    echo "REACT_APP_GRAPHQL_ENDPOINT=https://api.thegraph.com/subgraphs/name/github-username/subgraph-name" > .env
    ```
 4. Start this app:
-   ```bash
+   ```sh
    npm install
    npm start
    ```

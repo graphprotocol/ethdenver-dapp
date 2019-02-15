@@ -56,7 +56,7 @@ the above migration steps.
    ```sh
    sed -i -e \
      's/0x2E645469f354BB4F5c8a05B3b30A929361cf77eC/<GANACHE_CONTRACT_ADDRESS>/g' \
-     subgraph.yamll
+     subgraph.yaml
    ```
 5. Deploy the subgraph to your local Graph Node:
    ```sh

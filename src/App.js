@@ -17,8 +17,12 @@ import Error from './components/Error'
 import Gravatars from './components/Gravatars'
 import Filter from './components/Filter'
 
+if (!process.env.REACT_APP_GRAPHQL_ENDPOINT) {
+  throw new Error('REACT_APP_GRAPHQL_ENDPOINT environment variable not defined')
+}
+
 const client = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/rodventures/gravity',
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   cache: new InMemoryCache(),
 })
 

@@ -35,7 +35,7 @@ the above migration steps.
 
 1. Ceate a new example subgraph with:
    ```sh
-   graph init <USERNAME>/example-subgraph
+   graph init <GITHUB_USERNAME>/example-subgraph
    ```
 2. Follow the instructions for installing dependencies and running
    the code generation (typically: `yarn && yarn codegen`).
@@ -60,10 +60,10 @@ the above migration steps.
    ```
 5. Deploy the subgraph to your local Graph Node:
    ```sh
-   graph create --node http://localhost:8020/ <USERNAME>/example-subgraph
-   graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/ <USERNAME>/example-subgraph
+   graph create --node http://localhost:8020/ <GITHUB_USERNAME>/example-subgraph
+   graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/ <GITHUB_USERNAME>/example-subgraph
    ```
-6. You can now go to `http://localhost:8000/subgraphs/name/<USERNAME>/example-subgraph`
+6. You can now go to `http://localhost:8000/subgraphs/name/<GITHUB_USERNAME>/example-subgraph`
    to query our subgraph. Try the following query, for example:
    ```graphql
    {
@@ -80,12 +80,12 @@ the above migration steps.
 
 1. Write the the GraphQL endpoint of our subgraph to `.env` in this directory:
    ```sh
-   echo "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:8000/subgraphs/name/<USERNAME>/example-subgraph" > .env
+   echo "REACT_APP_GRAPHQL_ENDPOINT=http://localhost:8000/subgraphs/name/<GITHUB_USERNAME>/example-subgraph" > .env
    ```
 2. Then, start this app:
    ```sh
-   npm install
-   npm start
+   yarn install
+   yarn start
    ```
 
 ### Hosted Service
@@ -108,6 +108,6 @@ the above migration steps.
    ```
 4. Start this app:
    ```sh
-   npm install
-   npm start
+   yarn install
+   yarn start
    ```

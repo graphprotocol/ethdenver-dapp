@@ -100,7 +100,7 @@ the above migration steps.
 
 #### Connect this dApp to the subgraph
 
-1. Go to `https://thegraph.com/exporer/subgraph/<GITHUB_USERNAME>/<SUBGRAPH_NAME>/`
+1. Go to `https://thegraph.com/explorer/subgraph/<GITHUB_USERNAME>/<SUBGRAPH_NAME>/`
 2. Copy the GraphQL HTTP endpoint (e.g. `https://api.thegraph.com/subgraphs/name/github-username/subgraph-name`)
 3. Write it to `.env` in this directory:
    ```sh

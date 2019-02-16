@@ -33,9 +33,9 @@ the above migration steps.
 
 #### Deploy the subgraph to the local Graph Node
 
-1. Ceate a new example subgraph with:
+1. Create a new example subgraph with:
    ```sh
-   graph init <GITHUB_USERNAME>/example-subgraph
+   graph init <GITHUB_USERNAME>/example-subgraph <TARGET_DIRECTORY>
    ```
 2. Follow the instructions for installing dependencies and running
    the code generation (typically: `yarn && yarn codegen`).

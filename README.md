@@ -58,6 +58,8 @@ the above migration steps.
      's/0x2E645469f354BB4F5c8a05B3b30A929361cf77eC/<GANACHE_CONTRACT_ADDRESS>/g' \
      subgraph.yaml
    ```
+    Check out the [docs](https://www.gnu.org/software/sed/manual/sed.html) if you don't know what sed does. Basically, it replaces the hardcoded contract address `0x2E645469f354BB4F5c8a05B3b30A929361cf77eC` with the address of your locally-deployed `GravityRegistry` contract.
+
 5. Deploy the subgraph to your local Graph Node:
    ```sh
    graph create --node http://localhost:8020/ <GITHUB_USERNAME>/example-subgraph

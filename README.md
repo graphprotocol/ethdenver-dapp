@@ -35,7 +35,7 @@ the above migration steps.
 
 1. Ceate a new example subgraph with:
    ```sh
-   graph init <GITHUB_USERNAME>/example-subgraph
+   graph init --from-example <GITHUB_USERNAME>/example-subgraph
    ```
 2. Follow the instructions for installing dependencies and running
    the code generation (typically: `yarn && yarn codegen`).
